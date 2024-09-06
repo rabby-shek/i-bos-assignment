@@ -1,9 +1,11 @@
 {
-  "posts": [
+  "users": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "firstName": "Celeste",
+      "lastName": "Goodman",
+      "email": "betydora@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 1
     }
   ],
   "cart": [],
