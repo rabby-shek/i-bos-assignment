@@ -30,6 +30,10 @@
   font-weight: 500;
   font-size: 18px;
 }
+.navbar-light .navbar-nav .nav-link.active{
+  background-color: #F8F8F8;
+  border-radius: 6px;
+}
 /* LOGIN PAGE STYLES */
 .login-welcome-text{
   font-size: 32px;

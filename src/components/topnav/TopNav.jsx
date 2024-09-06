@@ -29,7 +29,7 @@ const TopNav = () => {
             {/* Center the Nav Links */}
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" to="/">
+                <NavLink className="nav-link" aria-current="page" to="/">
                   Home
                 </NavLink>
               </li>
@@ -39,17 +39,17 @@ const TopNav = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">
+                <NavLink className="nav-link" to="/categories">
                   Categories
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">
+                <NavLink className="nav-link" to="/custom">
                   Custom
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">
+                <NavLink className="nav-link" to="/blog">
                   Blog
                 </NavLink>
               </li>
@@ -60,7 +60,7 @@ const TopNav = () => {
                 <PiHandbagSimple size={30} />
 
                 <span className="cart-badge text-white bg-dark position-absolute">
-                  3
+                  0
                 </span>
               </div>
 
