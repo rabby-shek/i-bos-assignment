@@ -21,12 +21,14 @@ const Login = () => {
                 <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
                   <div className="col-12 col-lg-11 col-xl-10">
                     <div className="card-body p-3 p-md-4 p-xl-5">
-                      <div className="row">
+                      <div className="row text-center">
                         <div className="col-12">
                           <div className="mb-5">
                             <div className="mb-4">
-                              <h4>Welcome back!</h4>
-                              <p>
+                              <div className="login-welcome-text">
+                                Welcome back!
+                              </div>
+                              <p className="login-credential-text">
                                 Enter your Credentials to access your account
                               </p>
                             </div>
@@ -100,7 +102,7 @@ const Login = () => {
                                 className="form-check-label text-secondary"
                                 htmlFor="remember_me"
                               >
-                                Keep me logged in
+                                I Agree to the Term & Policy
                               </label>
                             </div>
                           </div>
@@ -110,7 +112,7 @@ const Login = () => {
                                 className="btn btn-dark btn-lg"
                                 type="submit"
                               >
-                                Log in now
+                                Sign in
                               </button>
                             </div>
                           </div>
@@ -120,9 +122,9 @@ const Login = () => {
                       <div className="row pt-5">
                         <div className="col-12 text-center pb-5">
                           <div className="d-flex align-items-center justify-content-center">
-                            <div className="flex-grow-1 border-top border-dark"></div>
+                            <div className="flex-grow-1 border-top border-grey"></div>
                             <p className="mx-3 mb-0">Or</p>
-                            <div className="flex-grow-1 border-top border-dark"></div>
+                            <div className="flex-grow-1 border-top border-grey"></div>
                           </div>
                         </div>
                         <div className="col-lg-6 col-sm-6">
@@ -159,7 +161,7 @@ const Login = () => {
                               href="#!"
                               className="link-secondary text-decoration-none"
                             >
-                              Have an account? Sign Up
+                             Don't have an account? Sign Up
                             </a>
                           </div>
                         </div>

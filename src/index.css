@@ -30,3 +30,13 @@
   font-weight: 500;
   font-size: 18px;
 }
+/* LOGIN PAGE STYLES */
+.login-welcome-text{
+  font-size: 32px;
+  font-weight: 500;
+}
+.login-credential-text{
+  color: #707070;
+  font-weight: 500;
+  font-size: 16px;
+}
