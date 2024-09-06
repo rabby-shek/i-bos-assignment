@@ -6,20 +6,14 @@
       "author": "typicode"
     }
   ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
+  "cart": [],
   "products": [
     {
       "id": 1,
       "image": "https://i.imgur.com/xdbHo4E.png",
       "category": "Women,bag",
       "name": "Women leather bag",
-      "oldPrice": 96.0,
+      "oldPrice": 96,
       "newPrice": 230.99
     },
     {
@@ -27,7 +21,7 @@
       "image": "https://i.imgur.com/xdbHo4E.png",
       "category": "Women,bag",
       "name": "Women leather bag",
-      "oldPrice": 96.0,
+      "oldPrice": 96,
       "newPrice": 230.99
     },
     {
@@ -35,7 +29,7 @@
       "image": "https://i.imgur.com/xdbHo4E.png",
       "category": "Women,bag",
       "name": "Women leather bag",
-      "oldPrice": 96.0,
+      "oldPrice": 96,
       "newPrice": 230.99
     },
     {
@@ -43,7 +37,7 @@
       "image": "https://i.imgur.com/xdbHo4E.png",
       "category": "Women,bag",
       "name": "Women leather bag",
-      "oldPrice": 96.0,
+      "oldPrice": 96,
       "newPrice": 230.99
     },
     {
@@ -51,7 +45,7 @@
       "image": "https://i.imgur.com/xdbHo4E.png",
       "category": "Women,bag",
       "name": "Women leather bag",
-      "oldPrice": 96.0,
+      "oldPrice": 96,
       "newPrice": 230.99
     },
     {
@@ -59,7 +53,7 @@
       "image": "https://i.imgur.com/xdbHo4E.png",
       "category": "Women,bag",
       "name": "Women leather bag",
-      "oldPrice": 96.0,
+      "oldPrice": 96,
       "newPrice": 230.99
     }
   ]

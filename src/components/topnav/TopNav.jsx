@@ -2,8 +2,12 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { PiHandbagSimple } from "react-icons/pi";
 import BrandLogo from "../../assets/images/FurniFlex.png";
+import { useCartContext } from "../../contexts/CartContext";
+
 const TopNav = () => {
   const navigate = useNavigate();
+  const { cartItems } = useCartContext(); // Access cartItems from context
+
   return (
     <header className="header">
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -58,9 +62,8 @@ const TopNav = () => {
             <div className="d-flex align-items-center">
               <div className="position-relative me-3" onClick={() => navigate("/cart")}>
                 <PiHandbagSimple size={30} />
-
                 <span className="cart-badge text-white bg-dark position-absolute">
-                  0
+                  {cartItems.length}
                 </span>
               </div>
 

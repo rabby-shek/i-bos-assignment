@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
+import React, { useState } from "react";
+import { useProductContext } from "../contexts/ProductContext";
+import { NavLink } from "react-router-dom";
+import { useCartContext } from "../contexts/CartContext"; // Import CartContext
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const { products } = useProductContext();
+  const { addItemToCart } = useCartContext(); // Destructure addItemToCart from CartContext
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10; // Number of products per page
-
-  // Fetch products data from the JSON file using Axios
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/products'); // Ensure the path matches where your JSON file is stored
-        setProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching products:", error.message);
-      }
-    };
-
-    fetchProducts();
-  }, []);
 
   // Calculate the index of the first and last products on the current page
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -47,54 +35,37 @@ const Products = () => {
       setCurrentPage((prevPage) => prevPage - 1);
     }
   };
-console.log(products);
+
+  // Handler for adding a product to the cart
+  const handleAddToCart = (product) => {
+    addItemToCart({
+      id: product.id,
+      name: product.name,
+      price: product.newPrice,
+      quantity: 1,
+      image: product.image,
+    });
+  };
+
   return (
     <div className="container mt-4">
       <div className="row">
         {/* Filter Section */}
         <aside className="col-lg-3 mb-4">
-          <h5 className="mb-3">Filters</h5>
           <form>
             <div className="mb-3">
-              <label className="form-label">Warranty Type</label>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value="brand1"
-                  id="brand1"
-                />
-                <label className="form-check-label" htmlFor="brand1">
-                  7 Days
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value="brand2"
-                  id="brand2"
-                />
-                <label className="form-check-label" htmlFor="brand2">
-                  1 Month
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value="brand3"
-                  id="brand3"
-                />
-                <label className="form-check-label" htmlFor="brand3">
-                  6 Month
-                </label>
-              </div>
+              <ul>
+                <li>
+                  <NavLink to="/">Rocking Chair</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/">Side Chair</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/">Lounge Chair</NavLink>
+                </li>
+              </ul>
             </div>
-            {/* Apply Filter Button */}
-            <button type="button" className="btn btn-primary w-100">
-              Apply Filters
-            </button>
           </form>
         </aside>
         {/* Product Cards Section */}
@@ -121,7 +92,12 @@ console.log(products);
                       <div className="product-links">
                         30% off
                       </div>
-                      <button className="btn btn-dark w-100 mt-2">Add to cart</button>
+                      <button
+                        className="btn btn-dark w-100 mt-2"
+                        onClick={() => handleAddToCart(product)} // Add to cart onClick
+                      >
+                        Add to cart
+                      </button>
                     </div>
                   </div>
                 </div>
