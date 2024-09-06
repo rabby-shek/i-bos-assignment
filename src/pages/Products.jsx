@@ -1,20 +1,25 @@
-import React, { useState } from "react";
-import { CiHeart } from "react-icons/ci";
-import { FaShoppingCart } from "react-icons/fa";
-import { CiStar } from "react-icons/ci";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+
 const Products = () => {
+  const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10; // Number of products per page
 
-  // Sample products array (replace with your actual products data)
-  const products = [
-    { id: 1, image: "https://i.imgur.com/xdbHo4E.png", category: "Women,bag", name: "Women leather bag", oldPrice: 96.0, newPrice: 230.99 },
-    { id: 2, image: "https://i.imgur.com/xdbHo4E.png", category: "Women,bag", name: "Women leather bag", oldPrice: 96.0, newPrice: 230.99 },
-    { id: 3, image: "https://i.imgur.com/xdbHo4E.png", category: "Women,bag", name: "Women leather bag", oldPrice: 96.0, newPrice: 230.99 },
-    { id: 4, image: "https://i.imgur.com/xdbHo4E.png", category: "Women,bag", name: "Women leather bag", oldPrice: 96.0, newPrice: 230.99 },
-    { id: 5, image: "https://i.imgur.com/xdbHo4E.png", category: "Women,bag", name: "Women leather bag", oldPrice: 96.0, newPrice: 230.99 },
-    { id: 6, image: "https://i.imgur.com/xdbHo4E.png", category: "Women,bag", name: "Women leather bag", oldPrice: 96.0, newPrice: 230.99 },
-  ];
+  // Fetch products data from the JSON file using Axios
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/products'); // Ensure the path matches where your JSON file is stored
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error.message);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   // Calculate the index of the first and last products on the current page
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -42,7 +47,7 @@ const Products = () => {
       setCurrentPage((prevPage) => prevPage - 1);
     }
   };
-
+console.log(products);
   return (
     <div className="container mt-4">
       <div className="row">
@@ -50,144 +55,24 @@ const Products = () => {
         <aside className="col-lg-3 mb-4">
           <h5 className="mb-3">Filters</h5>
           <form>
-            {/* Category Filter */}
-            <div className="mb-3">
-              <label htmlFor="category" className="form-label">
-                Category
-              </label>
-              <select className="form-select" id="category">
-                <option selected>All Categories</option>
-                <option value={1}>Electronics</option>
-                <option value={2}>Fashion</option>
-                <option value={3}>Home Appliances</option>
-              </select>
-            </div>
-            {/* Price Filter */}
-            <div className="mb-3">
-              <label htmlFor="price" className="form-label">
-                Price Range
-              </label>
-              <input
-                type="range"
-                className="form-range"
-                min={0}
-                max={1000}
-                id="price"
-              />
-            </div>
-            {/* Brand Filter */}
-            <div className="mb-3">
-              <label className="form-label">Brand</label>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  defaultValue="brand1"
-                  id="brand1"
-                />
-                <label className="form-check-label" htmlFor="brand1">
-                  Brand 1
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  defaultValue="brand2"
-                  id="brand2"
-                />
-                <label className="form-check-label" htmlFor="brand2">
-                  Brand 2
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  defaultValue="brand3"
-                  id="brand3"
-                />
-                <label className="form-check-label" htmlFor="brand3">
-                  Brand 3
-                </label>
-              </div>
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Stars</label>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  defaultValue="brand1"
-                  id="brand1"
-                />
-                <label className="form-check-label" htmlFor="brand1">
-                   <CiStar />
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  defaultValue="brand2"
-                  id="brand2"
-                />
-                <label className="form-check-label" htmlFor="brand2">
-                <CiStar /><CiStar />
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  defaultValue="brand3"
-                  id="brand3"
-                />
-                <label className="form-check-label" htmlFor="brand3">
-                <CiStar /><CiStar /><CiStar />
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  defaultValue="brand3"
-                  id="brand3"
-                />
-                <label className="form-check-label" htmlFor="brand3">
-                <CiStar /><CiStar /><CiStar /><CiStar />
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  defaultValue="brand3"
-                  id="brand3"
-                />
-                <label className="form-check-label" htmlFor="brand3">
-                <CiStar /><CiStar /><CiStar /><CiStar /><CiStar />
-                </label>
-              </div>
-            </div>
             <div className="mb-3">
               <label className="form-label">Warranty Type</label>
               <div className="form-check">
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  defaultValue="brand1"
+                  value="brand1"
                   id="brand1"
                 />
                 <label className="form-check-label" htmlFor="brand1">
-                   7 Days
+                  7 Days
                 </label>
               </div>
               <div className="form-check">
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  defaultValue="brand2"
+                  value="brand2"
                   id="brand2"
                 />
                 <label className="form-check-label" htmlFor="brand2">
@@ -198,7 +83,7 @@ const Products = () => {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  defaultValue="brand3"
+                  value="brand3"
                   id="brand3"
                 />
                 <label className="form-check-label" htmlFor="brand3">
@@ -223,7 +108,7 @@ const Products = () => {
                   </div>
                   <div className="product-details">
                     <h6>
-                      <a href="">{product.name}</a>
+                      <a href="#">{product.name}</a>
                     </h6>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -231,7 +116,7 @@ const Products = () => {
                     </p>
                     <div className="product-bottom-details">
                       <div className="product-price">
-                        <small>${product.oldPrice.toFixed(2)}</small>${product.newPrice.toFixed(2)}
+                        <small>${product.oldPrice.toFixed(2)}</small> ${product.newPrice.toFixed(2)}
                       </div>
                       <div className="product-links">
                         30% off

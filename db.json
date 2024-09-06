@@ -1,0 +1,66 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "image": "https://i.imgur.com/xdbHo4E.png",
+      "category": "Women,bag",
+      "name": "Women leather bag",
+      "oldPrice": 96.0,
+      "newPrice": 230.99
+    },
+    {
+      "id": 2,
+      "image": "https://i.imgur.com/xdbHo4E.png",
+      "category": "Women,bag",
+      "name": "Women leather bag",
+      "oldPrice": 96.0,
+      "newPrice": 230.99
+    },
+    {
+      "id": 3,
+      "image": "https://i.imgur.com/xdbHo4E.png",
+      "category": "Women,bag",
+      "name": "Women leather bag",
+      "oldPrice": 96.0,
+      "newPrice": 230.99
+    },
+    {
+      "id": 4,
+      "image": "https://i.imgur.com/xdbHo4E.png",
+      "category": "Women,bag",
+      "name": "Women leather bag",
+      "oldPrice": 96.0,
+      "newPrice": 230.99
+    },
+    {
+      "id": 5,
+      "image": "https://i.imgur.com/xdbHo4E.png",
+      "category": "Women,bag",
+      "name": "Women leather bag",
+      "oldPrice": 96.0,
+      "newPrice": 230.99
+    },
+    {
+      "id": 6,
+      "image": "https://i.imgur.com/xdbHo4E.png",
+      "category": "Women,bag",
+      "name": "Women leather bag",
+      "oldPrice": 96.0,
+      "newPrice": 230.99
+    }
+  ]
+}
