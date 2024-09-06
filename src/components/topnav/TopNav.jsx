@@ -1,8 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { PiHandbagSimple } from "react-icons/pi";
 import BrandLogo from "../../assets/images/FurniFlex.png";
 const TopNav = () => {
+  const navigate = useNavigate();
   return (
     <header className="header">
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -33,7 +34,7 @@ const TopNav = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">
+                <NavLink className="nav-link" to="/products">
                   Products
                 </NavLink>
               </li>
@@ -55,10 +56,10 @@ const TopNav = () => {
             </ul>
 
             <div className="d-flex align-items-center">
-              <div className="position-relative me-3">
+              <div className="position-relative me-3" onClick={() => navigate("/cart")}>
                 <PiHandbagSimple size={30} />
 
-                <span className="badge text-white bg-dark position-absolute">
+                <span className="cart-badge text-white bg-dark position-absolute">
                   3
                 </span>
               </div>
