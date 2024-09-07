@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 // Create a context
 const AuthContext = createContext();
@@ -11,8 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [success, setSuccess] = useState(null);
 
   // Function to handle sign in
-  const signIn = async ( email, password) => {
-   
+  const signIn = async (email, password) => {
     try {
       const response = await axios.get("http://localhost:8000/users", {
         params: { email, password },
@@ -22,20 +22,24 @@ export const AuthProvider = ({ children }) => {
         setUser(response.data[0]);
         setSuccess("Login successful!");
         setError(null);
-        return { success: true }; // Add this return
+
+        // Store user data in a cookie on sign in only
+        Cookies.set("user", JSON.stringify(response.data[0]), { expires: 7 }); // Expires in 7 days
+
+        return { success: true };
       } else {
         setError("Invalid email or password. Please try again.");
         setSuccess(null);
-        return { success: false }; // Add this return
+        return { success: false };
       }
     } catch (err) {
       setError("Login failed. Please try again.");
       setSuccess(null);
-      return { success: false }; // Add this return
+      return { success: false };
     }
   };
 
-  // Function to handle sign up with email existence check
+  // Function to handle sign up without storing data in a cookie
   const signUp = async (formData) => {
     try {
       // Check if the user already exists
@@ -66,10 +70,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Function to handle logout
+  const logout = () => {
+    setUser(null);
+    setSuccess(null);
+    setError(null);
+
+    // Remove the user data from the cookie
+    Cookies.remove("user");
+  };
+
   // Values provided by the context
   return (
     <AuthContext.Provider
-      value={{ user, signIn, signUp, error, success, setError, setSuccess }}
+      value={{ user, signIn, signUp, logout, error, success, setError, setSuccess }}
     >
       {children}
     </AuthContext.Provider>

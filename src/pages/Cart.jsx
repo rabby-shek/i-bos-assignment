@@ -3,10 +3,13 @@ import { FaTrash } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";
 import { LuMinus } from "react-icons/lu";
 import { useCartContext } from "../contexts/CartContext";
+import { useAuth } from "../contexts/AuthContext";
+import Cookies from "js-cookie";
 
 const Cart = () => {
   const { cartItems, removeItemFromCart, updateItemQuantity } =
     useCartContext();
+  const { user } = useAuth(); // Using user from AuthContext
 
   const handleIncrement = (item) => {
     updateItemQuantity(item.id, item.quantity + 1);
@@ -15,6 +18,18 @@ const Cart = () => {
   const handleDecrement = (item) => {
     if (item.quantity > 1) {
       updateItemQuantity(item.id, item.quantity - 1);
+    }
+  };
+
+  const handleCheckout = () => {
+    // Check if user is logged in by checking the cookie
+    const userCookie = Cookies.get("user");
+
+    if (userCookie) {
+      alert("Proceeding to checkout!");
+      // Add your checkout logic here
+    } else {
+      alert("You need to log in before proceeding to checkout.");
     }
   };
 
@@ -139,6 +154,7 @@ const Cart = () => {
                 <button
                   type="button"
                   className="btn btn-dark btn-lg btn-block w-100"
+                  onClick={handleCheckout}
                 >
                   Go to checkout
                 </button>

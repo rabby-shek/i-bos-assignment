@@ -1,43 +1,14 @@
 {
   "users": [
     {
-      "firstName": "Jaden",
-      "lastName": "Ashley",
-      "email": "nitur@mailinator.com",
+      "firstName": "Lucius",
+      "lastName": "Snider",
+      "email": "hagimyjel@mailinator.com",
       "password": "Pa$$w0rd!",
       "id": 1
-    },
-    {
-      "firstName": "Gabriel",
-      "lastName": "Cooke",
-      "email": "nykuwulefu@mailinator.com",
-      "password": "Pa$$w0rd!",
-      "id": 2
-    },
-    {
-      "firstName": "Britanney",
-      "lastName": "Salas",
-      "email": "jocuxyl@mailinator.com",
-      "password": "Pa$$w0rd!",
-      "id": 3
     }
   ],
-  "cart": [
-    {
-      "id": 1,
-      "name": "Women leather bag",
-      "price": 230.99,
-      "quantity": 1,
-      "image": "https://i.imgur.com/xdbHo4E.png"
-    },
-    {
-      "id": 3,
-      "name": "Women leather bag",
-      "price": 230.99,
-      "quantity": 1,
-      "image": "https://i.imgur.com/xdbHo4E.png"
-    }
-  ],
+  "cart": [],
   "products": [
     {
       "id": 1,

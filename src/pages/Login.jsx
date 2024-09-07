@@ -4,7 +4,7 @@ import BrandLogo from "../assets/images/login-brand.png";
 import { AppleIcon, GoogleIcon } from "../assets/icons";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom"; // For redirection after login
+import { NavLink, useNavigate } from "react-router-dom"; // For redirection after login
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -210,12 +210,12 @@ const Login = () => {
                       <div className="row">
                         <div className="col-12">
                           <div className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center mt-5">
-                            <a
-                              href="#!"
+                            <NavLink
+                              to="/auth/sign-up"
                               className="link-secondary text-decoration-none"
                             >
                               Don't have an account? Sign Up
-                            </a>
+                            </NavLink>
                           </div>
                         </div>
                       </div>
