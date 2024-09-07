@@ -1,5 +1,20 @@
 {
-  "users": [],
+  "users": [
+    {
+      "firstName": "Fay",
+      "lastName": "Clemons",
+      "email": "kunapeqa@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 1
+    },
+    {
+      "firstName": "Chadwick",
+      "lastName": "Abbott",
+      "email": "jygijunova@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 2
+    }
+  ],
   "cart": [
     {
       "id": 1,

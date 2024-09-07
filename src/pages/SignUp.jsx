@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import AutImg from "../assets/images/auth-page.png";
 import BrandLogo from "../assets/images/login-brand.png";
 import { AppleIcon, GoogleIcon } from "../assets/icons";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useAuth } from "../contexts/AuthContext";
 
 const SignUp = () => {
+  const { signUp, error, success, setError, setSuccess } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
   });
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+
+  useEffect(() => {
+    if (error) {
+      // Automatically hide the alert after 5 seconds
+      const timer = setTimeout(() => setError(""), 5000);
+      return () => clearTimeout(timer);
+    }
+    if (success) {
+      // Automatically hide the alert after 5 seconds
+      const timer = setTimeout(() => setSuccess(""), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error, success, setError, setSuccess]);
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
@@ -27,33 +40,43 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const validate = () => {
+    if (!formData.firstName.trim()) {
+      setError("First name is required");
+      return false;
+    }
+    if (!formData.lastName.trim()) {
+      setError("Last name is required");
+      return false;
+    }
+    if (!formData.email) {
+      setError("Email is required");
+      return false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setError("Email address is invalid");
+      return false;
+    }
+    if (!formData.password) {
+      setError("Password is required");
+      return false;
+    } else if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:8000/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      setSuccess('User registered successfully!');
+    if (validate()) {
+      signUp(formData);
+      setSuccess("Registration successful");
       setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
       });
-      setError(null);
-    } catch (error) {
-      setError('Registration failed. Please try again.');
-      setSuccess(null);
     }
   };
 
@@ -82,6 +105,38 @@ const SignUp = () => {
                         </div>
                       </div>
 
+                      {/* Bootstrap Alerts for Notifications */}
+                      {error && (
+                        <div
+                          className="alert alert-danger alert-dismissible fade show"
+                          role="alert"
+                        >
+                          {error}
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"
+                            onClick={() => setError("")}
+                          ></button>
+                        </div>
+                      )}
+                      {success && (
+                        <div
+                          className="alert alert-success alert-dismissible fade show"
+                          role="alert"
+                        >
+                          {success}
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"
+                            onClick={() => setSuccess("")}
+                          ></button>
+                        </div>
+                      )}
+
                       <form onSubmit={handleSubmit}>
                         <div className="row gy-3 overflow-hidden">
                           <div className="col-6">
@@ -108,7 +163,7 @@ const SignUp = () => {
                                 className="form-control"
                                 name="lastName"
                                 id="lastName"
-                                placeholder=''
+                                placeholder=""
                                 value={formData.lastName}
                                 onChange={handleChange}
                                 required
@@ -193,9 +248,6 @@ const SignUp = () => {
                         </div>
                       </form>
 
-                      {error && <div className="alert alert-danger mt-3">{error}</div>}
-                      {success && <div className="alert alert-success mt-3">{success}</div>}
-
                       <div className="row pt-5">
                         <div className="col-12 text-center pb-5">
                           <div className="d-flex align-items-center justify-content-center">
@@ -233,12 +285,13 @@ const SignUp = () => {
                       </div>
                       <div className="row">
                         <div className="col-12">
-                          <div className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center mt-5">
+                          <div className="text-center">
+                            Already have an account?{" "}
                             <a
                               href="#!"
-                              className="link-secondary text-decoration-none"
+                              className="link-primary text-decoration-none"
                             >
-                              Have an account? Sign In
+                              Log In
                             </a>
                           </div>
                         </div>
@@ -246,21 +299,12 @@ const SignUp = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-12 col-md-6 position-relative">
+                <div className="col-md-6 col-lg-6 d-none d-md-block">
                   <img
-                    className="img-fluid rounded-start w-100 h-100 object-fit-cover"
-                    loading="lazy"
                     src={AutImg}
-                    alt="Welcome back you've been missed!"
+                    className="img-fluid w-100 h-100 object-fit-cover rounded-3"
+                    alt="Authentication"
                   />
-                  <div className="position-absolute top-50 start-50 translate-middle text-center text-white">
-                    <img src={BrandLogo} alt="brand logo" />
-                    <p>
-                      Discover a seamless shopping experience with our curated
-                      collection of products. From fashion to electronics, we
-                      bring quality.
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
