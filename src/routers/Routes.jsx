@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Cart, Home, Login, Products, SignUp } from "../pages";
+import { Cart, Home, Login, NotFound, Products, SignUp } from "../pages";
 import { AuthLayout, WebsiteLayout } from "../components";
 
 const router = createBrowserRouter([
@@ -35,6 +35,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '*',
+    element: <NotFound />
+  }
 ]);
 
 export default router;
