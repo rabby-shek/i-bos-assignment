@@ -29,6 +29,13 @@
       "price": 230.99,
       "quantity": 1,
       "image": "https://i.imgur.com/xdbHo4E.png"
+    },
+    {
+      "id": 2,
+      "name": "Women leather bag",
+      "price": 230.99,
+      "quantity": 1,
+      "image": "https://i.imgur.com/xdbHo4E.png"
     }
   ],
   "products": [

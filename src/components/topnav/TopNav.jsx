@@ -7,7 +7,7 @@ import { useCartContext } from "../../contexts/CartContext";
 const TopNav = () => {
   const navigate = useNavigate();
   const { cartItems } = useCartContext(); // Access cartItems from context
-
+  console.log(cartItems.length);
   return (
     <header className="header">
       <nav className="navbar navbar-expand-lg navbar-light">

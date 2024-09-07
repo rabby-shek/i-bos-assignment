@@ -44,26 +44,29 @@ const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.post("http://localhost:8000/cart", product);
-      setCartItems(response.data); // Assuming the response returns the updated cart
+      fetchCartItems();
+      alert("new product added.");
     } catch (error) {
       setError("Error adding item to cart: " + error.message);
     }
   };
 
   // Update the quantity of an item in the cart
-  const updateItemQuantity = async (itemId, quantity) => {
-    try {
-      await axios.put(`http://localhost:8000/cart/${itemId}`, { quantity });
-      // Update the state locally after successful update
-      setCartItems((prevItems) =>
-        prevItems.map((item) =>
-          item.id === itemId ? { ...item, quantity } : item
-        )
-      );
-    } catch (error) {
-      setError("Error updating cart item: " + error.message);
-    }
+  const updateItemQuantity = (id, quantity) => {
+    setCartItems(prevItems => {
+      const itemIndex = prevItems.findIndex(item => item.id === id);
+      if (itemIndex !== -1) {
+        // Item exists, update quantity
+        const updatedItems = [...prevItems];
+        updatedItems[itemIndex].quantity = quantity;
+        return updatedItems;
+      } else {
+        // Item does not exist, handle this case
+        return [...prevItems, { id, quantity, /* other item properties */ }];
+      }
+    });
   };
+  
 
   // Remove an item from the cart
   const removeItemFromCart = async (itemId) => {
