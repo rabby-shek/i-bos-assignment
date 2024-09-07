@@ -60,7 +60,7 @@ const TopNav = () => {
             </ul>
 
             <div className="d-flex align-items-center">
-              <div className="position-relative me-3" onClick={() => navigate("/cart")}>
+              <div className="position-relative me-3 cursor-pointer" onClick={() => navigate("/cart")}>
                 <PiHandbagSimple size={30} />
                 <span className="cart-badge text-white bg-dark position-absolute">
                   {cartItems.length}

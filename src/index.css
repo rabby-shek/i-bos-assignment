@@ -3,6 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* GLOBAL STYLES */
+.cursor-pointer {
+  cursor: pointer;
+}
 
 /* NAVBAR STYLES */
 .navbar {
