@@ -1,18 +1,25 @@
 {
   "users": [
     {
-      "firstName": "Fay",
-      "lastName": "Clemons",
-      "email": "kunapeqa@mailinator.com",
+      "firstName": "Jaden",
+      "lastName": "Ashley",
+      "email": "nitur@mailinator.com",
       "password": "Pa$$w0rd!",
       "id": 1
     },
     {
-      "firstName": "Chadwick",
-      "lastName": "Abbott",
-      "email": "jygijunova@mailinator.com",
+      "firstName": "Gabriel",
+      "lastName": "Cooke",
+      "email": "nykuwulefu@mailinator.com",
       "password": "Pa$$w0rd!",
       "id": 2
+    },
+    {
+      "firstName": "Britanney",
+      "lastName": "Salas",
+      "email": "jocuxyl@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 3
     }
   ],
   "cart": [

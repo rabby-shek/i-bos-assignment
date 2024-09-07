@@ -3,14 +3,15 @@ import AutImg from "../assets/images/auth-page.png";
 import BrandLogo from "../assets/images/login-brand.png";
 import { AppleIcon, GoogleIcon } from "../assets/icons";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import axios from "axios"; // Import Axios
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom"; // For redirection after login
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState(""); // State for email
-  const [password, setPassword] = useState(""); // State for password
-  const [error, setError] = useState(null); // State for error messages
-  const [success, setSuccess] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { signIn, error, setError, success, setSuccess } = useAuth(); // Import necessary hooks
+  const navigate = useNavigate(); // Initialize navigation for redirection
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
@@ -18,22 +19,17 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null); // Clear previous errors
     try {
-      // Send login request to API
-      const response = await axios.post("http://localhost:8000/users", {
-        email,
-        password,
-      });
-
-      // Handle successful response
-      console.log("Login successful:", response.data);
-      setSuccess("Login successful");
-      // Redirect user or update UI as needed
+      const result = await signIn(email, password); // Call the signIn function
+      if (result.success) {
+        setSuccess("Login Successful");
+        navigate("/"); // Redirect to dashboard after successful login
+      } else {
+        setError("Invalid credentials, please try again."); // Set error message
+      }
     } catch (err) {
-      // Handle error response
-      console.error("Login failed:", err.response.data);
-      setError(err.response.data.message || "Login failed. Please try again.");
-      setSuccess(err.response.data.message);
+      setError("An error occurred during login. Please try again."); // Handle unexpected errors
     }
   };
 
@@ -61,7 +57,36 @@ const Login = () => {
                           </div>
                         </div>
                       </div>
-
+                      {error && (
+                        <div
+                          className="alert alert-danger alert-dismissible fade show"
+                          role="alert"
+                        >
+                          {error}
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"
+                            onClick={() => setError("")}
+                          ></button>
+                        </div>
+                      )}
+                      {success && (
+                        <div
+                          className="alert alert-success alert-dismissible fade show"
+                          role="alert"
+                        >
+                          {success}
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"
+                            onClick={() => setSuccess("")}
+                          ></button>
+                        </div>
+                      )}
                       <form onSubmit={handleSubmit}>
                         <div className="row gy-3 overflow-hidden">
                           <div className="col-12">
@@ -109,11 +134,6 @@ const Login = () => {
                               </span>
                             </div>
                           </div>
-                          {error && (
-                            <div className="col-12 text-danger">
-                              {error}
-                            </div>
-                          )}
                           <div className="row">
                             <div className="col-12 text-end">
                               <a
@@ -129,7 +149,6 @@ const Login = () => {
                               <input
                                 className="form-check-input"
                                 type="checkbox"
-                                defaultValue
                                 name="remember_me"
                                 id="remember_me"
                               />
@@ -153,7 +172,6 @@ const Login = () => {
                           </div>
                         </div>
                       </form>
-                      {success && <div className="alert alert-success mt-3">{success}</div>}
                       <div className="row pt-5">
                         <div className="col-12 text-center pb-5">
                           <div className="d-flex align-items-center justify-content-center">
@@ -196,7 +214,7 @@ const Login = () => {
                               href="#!"
                               className="link-secondary text-decoration-none"
                             >
-                             Don't have an account? Sign Up
+                              Don't have an account? Sign Up
                             </a>
                           </div>
                         </div>
@@ -215,8 +233,8 @@ const Login = () => {
                     <img src={BrandLogo} alt="brand logo" />
                     <p>
                       Discover a seamless shopping experience with our curated
-                      collection of products. From fashion to electronics, we
-                      bring quality.
+                      collection of products. From fashion to electronics, find
+                      everything you need in one place. Happy shopping!
                     </p>
                   </div>
                 </div>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import AutImg from "../assets/images/auth-page.png";
-import BrandLogo from "../assets/images/login-brand.png";
-import { AppleIcon, GoogleIcon } from "../assets/icons";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useAuth } from "../contexts/AuthContext";
-
+import { AppleIcon, GoogleIcon } from "../assets/icons";
+import { NavLink } from "react-router-dom";
 const SignUp = () => {
   const { signUp, error, success, setError, setSuccess } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
@@ -16,14 +15,12 @@ const SignUp = () => {
   });
 
   useEffect(() => {
-    if (error) {
+    if (error || success) {
       // Automatically hide the alert after 5 seconds
-      const timer = setTimeout(() => setError(""), 5000);
-      return () => clearTimeout(timer);
-    }
-    if (success) {
-      // Automatically hide the alert after 5 seconds
-      const timer = setTimeout(() => setSuccess(""), 5000);
+      const timer = setTimeout(() => {
+        setError("");
+        setSuccess("");
+      }, 5000);
       return () => clearTimeout(timer);
     }
   }, [error, success, setError, setSuccess]);
@@ -66,17 +63,11 @@ const SignUp = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      signUp(formData);
-      setSuccess("Registration successful");
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-      });
+      // Call signUp from AuthContext with the form data
+      await signUp(formData);
     }
   };
 
@@ -287,23 +278,23 @@ const SignUp = () => {
                         <div className="col-12">
                           <div className="text-center">
                             Already have an account?{" "}
-                            <a
-                              href="#!"
+                            <NavLink
+                              to="/auth/login"
                               className="link-primary text-decoration-none"
                             >
                               Log In
-                            </a>
+                            </NavLink>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="col-md-6 col-lg-6 d-none d-md-block">
+                <div className="col-12 col-md-6 d-flex justify-content-center align-items-center bg-light-subtle">
                   <img
+                    className="img-fluid auth-img"
                     src={AutImg}
-                    className="img-fluid w-100 h-100 object-fit-cover rounded-3"
-                    alt="Authentication"
+                    alt="Sign Up"
                   />
                 </div>
               </div>
