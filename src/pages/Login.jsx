@@ -3,12 +3,38 @@ import AutImg from "../assets/images/auth-page.png";
 import BrandLogo from "../assets/images/login-brand.png";
 import { AppleIcon, GoogleIcon } from "../assets/icons";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import axios from "axios"; // Import Axios
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState(""); // State for email
+  const [password, setPassword] = useState(""); // State for password
+  const [error, setError] = useState(null); // State for error messages
+  const [success, setSuccess] = useState(null);
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Send login request to API
+      const response = await axios.post("http://localhost:8000/users", {
+        email,
+        password,
+      });
+
+      // Handle successful response
+      console.log("Login successful:", response.data);
+      setSuccess("Login successful");
+      // Redirect user or update UI as needed
+    } catch (err) {
+      // Handle error response
+      console.error("Login failed:", err.response.data);
+      setError(err.response.data.message || "Login failed. Please try again.");
+      setSuccess(err.response.data.message);
+    }
   };
 
   return (
@@ -36,7 +62,7 @@ const Login = () => {
                         </div>
                       </div>
 
-                      <form action="#!">
+                      <form onSubmit={handleSubmit}>
                         <div className="row gy-3 overflow-hidden">
                           <div className="col-12">
                             <div className="form-floating mb-3">
@@ -46,6 +72,8 @@ const Login = () => {
                                 name="email"
                                 id="email"
                                 placeholder="name@example.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
                               />
                               <label htmlFor="email" className="form-label">
@@ -61,6 +89,8 @@ const Login = () => {
                                 name="password"
                                 id="password"
                                 placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                               />
                               <label htmlFor="password" className="form-label">
@@ -79,6 +109,11 @@ const Login = () => {
                               </span>
                             </div>
                           </div>
+                          {error && (
+                            <div className="col-12 text-danger">
+                              {error}
+                            </div>
+                          )}
                           <div className="row">
                             <div className="col-12 text-end">
                               <a
@@ -118,7 +153,7 @@ const Login = () => {
                           </div>
                         </div>
                       </form>
-
+                      {success && <div className="alert alert-success mt-3">{success}</div>}
                       <div className="row pt-5">
                         <div className="col-12 text-center pb-5">
                           <div className="d-flex align-items-center justify-content-center">

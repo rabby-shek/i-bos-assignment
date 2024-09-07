@@ -1,14 +1,14 @@
 {
-  "users": [
+  "users": [],
+  "cart": [
     {
-      "firstName": "Celeste",
-      "lastName": "Goodman",
-      "email": "betydora@mailinator.com",
-      "password": "Pa$$w0rd!",
-      "id": 1
+      "id": 1,
+      "name": "Women leather bag",
+      "price": 230.99,
+      "quantity": 1,
+      "image": "https://i.imgur.com/xdbHo4E.png"
     }
   ],
-  "cart": [],
   "products": [
     {
       "id": 1,
